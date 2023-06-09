@@ -1,0 +1,386 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище PTestKModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Author">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Ganr">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Knigi">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_authors" Type="int" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="id_ganr" Type="int" />
+          <Property Name="Opisanie" Type="nvarchar(max)" />
+          <Property Name="Kol" Type="int" />
+          <Property Name="Price" Type="int" />
+          <Property Name="image" Type="nvarchar(max)" />
+          <Property Name="Skidka" Type="int" />
+        </EntityType>
+        <EntityType Name="Korzina">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_kniga" Type="int" />
+          <Property Name="Kol" Type="int" />
+        </EntityType>
+        <EntityType Name="Punkt">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Zakaz">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="zakaz" Type="nvarchar(max)" />
+          <Property Name="id_punkt" Type="int" />
+        </EntityType>
+        <Association Name="FK_Knigi_Author">
+          <End Role="Author" Type="Self.Author" Multiplicity="0..1" />
+          <End Role="Knigi" Type="Self.Knigi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Author">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Knigi">
+              <PropertyRef Name="id_authors" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Knigi_Ganr">
+          <End Role="Ganr" Type="Self.Ganr" Multiplicity="0..1" />
+          <End Role="Knigi" Type="Self.Knigi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ganr">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Knigi">
+              <PropertyRef Name="id_ganr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Korzina_Knigi">
+          <End Role="Knigi" Type="Self.Knigi" Multiplicity="0..1" />
+          <End Role="Korzina" Type="Self.Korzina" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Knigi">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Korzina">
+              <PropertyRef Name="id_kniga" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Zakaz_Punkt">
+          <End Role="Punkt" Type="Self.Punkt" Multiplicity="0..1" />
+          <End Role="Zakaz" Type="Self.Zakaz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Punkt">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Zakaz">
+              <PropertyRef Name="id_punkt" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище PTestKModelContainer">
+          <EntitySet Name="Author" EntityType="Self.Author" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ganr" EntityType="Self.Ganr" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Knigi" EntityType="Self.Knigi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Korzina" EntityType="Self.Korzina" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Punkt" EntityType="Self.Punkt" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Zakaz" EntityType="Self.Zakaz" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Knigi_Author" Association="Self.FK_Knigi_Author">
+            <End Role="Author" EntitySet="Author" />
+            <End Role="Knigi" EntitySet="Knigi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Knigi_Ganr" Association="Self.FK_Knigi_Ganr">
+            <End Role="Ganr" EntitySet="Ganr" />
+            <End Role="Knigi" EntitySet="Knigi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Korzina_Knigi" Association="Self.FK_Korzina_Knigi">
+            <End Role="Knigi" EntitySet="Knigi" />
+            <End Role="Korzina" EntitySet="Korzina" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Zakaz_Punkt" Association="Self.FK_Zakaz_Punkt">
+            <End Role="Punkt" EntitySet="Punkt" />
+            <End Role="Zakaz" EntitySet="Zakaz" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PTestKModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Author">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Knigi" Relationship="Self.FK_Knigi_Author" FromRole="Author" ToRole="Knigi" />
+        </EntityType>
+        <EntityType Name="Ganr">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Knigi" Relationship="Self.FK_Knigi_Ganr" FromRole="Ganr" ToRole="Knigi" />
+        </EntityType>
+        <EntityType Name="Knigi">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_authors" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="id_ganr" Type="Int32" />
+          <Property Name="Opisanie" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Kol" Type="Int32" />
+          <Property Name="Price" Type="Int32" />
+          <Property Name="image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Skidka" Type="Int32" />
+          <NavigationProperty Name="Author" Relationship="Self.FK_Knigi_Author" FromRole="Knigi" ToRole="Author" />
+          <NavigationProperty Name="Ganr" Relationship="Self.FK_Knigi_Ganr" FromRole="Knigi" ToRole="Ganr" />
+          <NavigationProperty Name="Korzina" Relationship="Self.FK_Korzina_Knigi" FromRole="Knigi" ToRole="Korzina" />
+        </EntityType>
+        <EntityType Name="Korzina">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_kniga" Type="Int32" />
+          <Property Name="Kol" Type="Int32" />
+          <NavigationProperty Name="Knigi" Relationship="Self.FK_Korzina_Knigi" FromRole="Korzina" ToRole="Knigi" />
+        </EntityType>
+        <EntityType Name="Punkt">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Zakaz" Relationship="Self.FK_Zakaz_Punkt" FromRole="Punkt" ToRole="Zakaz" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Zakaz">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="zakaz1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="id_punkt" Type="Int32" />
+          <NavigationProperty Name="Punkt" Relationship="Self.FK_Zakaz_Punkt" FromRole="Zakaz" ToRole="Punkt" />
+        </EntityType>
+        <Association Name="FK_Knigi_Author">
+          <End Role="Author" Type="Self.Author" Multiplicity="0..1" />
+          <End Role="Knigi" Type="Self.Knigi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Author">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Knigi">
+              <PropertyRef Name="id_authors" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Knigi_Ganr">
+          <End Role="Ganr" Type="Self.Ganr" Multiplicity="0..1" />
+          <End Role="Knigi" Type="Self.Knigi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ganr">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Knigi">
+              <PropertyRef Name="id_ganr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Korzina_Knigi">
+          <End Role="Knigi" Type="Self.Knigi" Multiplicity="0..1" />
+          <End Role="Korzina" Type="Self.Korzina" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Knigi">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Korzina">
+              <PropertyRef Name="id_kniga" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Zakaz_Punkt">
+          <End Role="Punkt" Type="Self.Punkt" Multiplicity="0..1" />
+          <End Role="Zakaz" Type="Self.Zakaz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Punkt">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Zakaz">
+              <PropertyRef Name="id_punkt" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PTestKEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Author" EntityType="Self.Author" />
+          <EntitySet Name="Ganr" EntityType="Self.Ganr" />
+          <EntitySet Name="Knigi" EntityType="Self.Knigi" />
+          <EntitySet Name="Korzina" EntityType="Self.Korzina" />
+          <EntitySet Name="Punkt" EntityType="Self.Punkt" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Zakaz" EntityType="Self.Zakaz" />
+          <AssociationSet Name="FK_Knigi_Author" Association="Self.FK_Knigi_Author">
+            <End Role="Author" EntitySet="Author" />
+            <End Role="Knigi" EntitySet="Knigi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Knigi_Ganr" Association="Self.FK_Knigi_Ganr">
+            <End Role="Ganr" EntitySet="Ganr" />
+            <End Role="Knigi" EntitySet="Knigi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Korzina_Knigi" Association="Self.FK_Korzina_Knigi">
+            <End Role="Knigi" EntitySet="Knigi" />
+            <End Role="Korzina" EntitySet="Korzina" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Zakaz_Punkt" Association="Self.FK_Zakaz_Punkt">
+            <End Role="Punkt" EntitySet="Punkt" />
+            <End Role="Zakaz" EntitySet="Zakaz" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище PTestKModelContainer" CdmEntityContainer="PTestKEntities">
+          <EntitySetMapping Name="Author">
+            <EntityTypeMapping TypeName="PTestKModel.Author">
+              <MappingFragment StoreEntitySet="Author">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ganr">
+            <EntityTypeMapping TypeName="PTestKModel.Ganr">
+              <MappingFragment StoreEntitySet="Ganr">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Knigi">
+            <EntityTypeMapping TypeName="PTestKModel.Knigi">
+              <MappingFragment StoreEntitySet="Knigi">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_authors" ColumnName="id_authors" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="id_ganr" ColumnName="id_ganr" />
+                <ScalarProperty Name="Opisanie" ColumnName="Opisanie" />
+                <ScalarProperty Name="Kol" ColumnName="Kol" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="Skidka" ColumnName="Skidka" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Korzina">
+            <EntityTypeMapping TypeName="PTestKModel.Korzina">
+              <MappingFragment StoreEntitySet="Korzina">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_kniga" ColumnName="id_kniga" />
+                <ScalarProperty Name="Kol" ColumnName="Kol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Punkt">
+            <EntityTypeMapping TypeName="PTestKModel.Punkt">
+              <MappingFragment StoreEntitySet="Punkt">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="PTestKModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Zakaz">
+            <EntityTypeMapping TypeName="PTestKModel.Zakaz">
+              <MappingFragment StoreEntitySet="Zakaz">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="zakaz1" ColumnName="zakaz" />
+                <ScalarProperty Name="id_punkt" ColumnName="id_punkt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

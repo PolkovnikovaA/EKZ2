@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0b742dff272c4c8a99606ad9226fec52" Name="Diagram1">
+        <EntityTypeShape EntityType="PTestKModel.Author" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PTestKModel.Ganr" Width="1.5" PointX="0.75" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PTestKModel.Knigi" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="PTestKModel.Korzina" Width="1.5" PointX="5.25" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PTestKModel.Punkt" Width="1.5" PointX="2.75" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="PTestKModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PTestKModel.Zakaz" Width="1.5" PointX="5" PointY="5.875" IsExpanded="true" />
+        <AssociationConnector Association="PTestKModel.FK_Knigi_Author" ManuallyRouted="false" />
+        <AssociationConnector Association="PTestKModel.FK_Knigi_Ganr" ManuallyRouted="false" />
+        <AssociationConnector Association="PTestKModel.FK_Korzina_Knigi" ManuallyRouted="false" />
+        <AssociationConnector Association="PTestKModel.FK_Zakaz_Punkt" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
